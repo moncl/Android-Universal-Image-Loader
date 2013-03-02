@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.nostra13.example.universalimageloader.Constants.Extra;
@@ -41,9 +42,16 @@ public class ImagePagerActivity extends BaseActivity {
 
 	DisplayImageOptions options;
 
+	private static ScrollView Scroll_Vertical;
+	protected static int currentX = 0;
+	protected static int currentY = 0;
+	
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ac_image_pager);
+		
+	    
 
 		Bundle bundle = getIntent().getExtras();
 		String[] imageUrls = bundle.getStringArray(Extra.IMAGES);
@@ -54,7 +62,7 @@ public class ImagePagerActivity extends BaseActivity {
 			.showImageOnFail(R.drawable.ic_error)
 			.resetViewBeforeLoading()
 			.cacheOnDisc()
-			.imageScaleType(ImageScaleType.IN_SAMPLE_INT)
+			.imageScaleType(ImageScaleType.EXACTLY)
 			.bitmapConfig(Bitmap.Config.RGB_565)
 			.displayer(new FadeInBitmapDisplayer(300))
 			.build();
@@ -132,6 +140,7 @@ public class ImagePagerActivity extends BaseActivity {
 			});
 
 			((ViewPager) view).addView(imageLayout, 0);
+			
 			return imageLayout;
 		}
 

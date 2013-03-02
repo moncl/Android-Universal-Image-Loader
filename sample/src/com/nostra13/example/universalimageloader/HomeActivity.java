@@ -44,29 +44,16 @@ public class HomeActivity extends BaseActivity {
 		}
 	}
 
-	public void onImageListClick(View view) {
-		Intent intent = new Intent(this, ImageListActivity.class);
-		intent.putExtra(Extra.IMAGES, IMAGES);
-		startActivity(intent);
-	}
-
+	
 	public void onImageGridClick(View view) {
 		Intent intent = new Intent(this, ImageGridActivity.class);
 		intent.putExtra(Extra.IMAGES, IMAGES);
 		startActivity(intent);
 	}
 
-	public void onImagePagerClick(View view) {
-		Intent intent = new Intent(this, ImagePagerActivity.class);
-		intent.putExtra(Extra.IMAGES, IMAGES);
-		startActivity(intent);
-	}
+	
 
-	public void onImageGalleryClick(View view) {
-		Intent intent = new Intent(this, ImageGalleryActivity.class);
-		intent.putExtra(Extra.IMAGES, IMAGES);
-		startActivity(intent);
-	}
+	
 
 	@Override
 	public void onBackPressed() {

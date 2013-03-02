@@ -17,13 +17,7 @@
             android:text="@string/label_activity_examples"
             android:textSize="24sp" />
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dip"
-            android:onClick="onImageListClick"
-            android:text="@string/button_image_list" />
-
+        
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -31,19 +25,7 @@
             android:onClick="onImageGridClick"
             android:text="@string/button_image_grid" />
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dip"
-            android:onClick="onImagePagerClick"
-            android:text="@string/button_image_pager" />
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dip"
-            android:onClick="onImageGalleryClick"
-            android:text="@string/button_image_gallery" />
+     
     </LinearLayout>
 
 </ScrollView>

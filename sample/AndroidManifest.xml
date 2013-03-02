@@ -17,7 +17,8 @@
         android:label="@string/app_name" >
         <activity
             android:name=".HomeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,10 +33,13 @@
             android:label="@string/ac_name_image_grid" />
         <activity
             android:name=".ImagePagerActivity"
-            android:label="@string/ac_name_image_pager" />
+            android:label="@string/ac_name_image_pager" 
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ImageGalleryActivity"
-            android:label="@string/ac_name_image_gallery" />
+            android:label="@string/ac_name_image_gallery" 
+            android:screenOrientation="portrait"/>
 
         <!-- Widget -->
         <receiver android:name=".widget.UILWidgetProvider" >

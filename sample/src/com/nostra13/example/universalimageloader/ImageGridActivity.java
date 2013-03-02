@@ -43,9 +43,12 @@ public class ImageGridActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ac_image_grid);
-
+		
+	
 		Bundle bundle = getIntent().getExtras();
 		imageUrls = bundle.getStringArray(Extra.IMAGES);
+		
+		//imageUrls=strURLS;
 
 		options = new DisplayImageOptions.Builder()
 			.showStubImage(R.drawable.ic_stub)
