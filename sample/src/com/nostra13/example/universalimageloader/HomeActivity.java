@@ -22,11 +22,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
-import android.widget.Toast;
 
 import com.nostra13.example.universalimageloader.Constants.Extra;
 import com.nostra13.universalimageloader.utils.L;
@@ -40,21 +50,60 @@ public class HomeActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ac_home);
 
+		
+		
 		File testImageOnSdCard = new File("/mnt/sdcard/UniversalImageLoader.png");
 		if (!testImageOnSdCard.exists()) {
 			copyTestImageToSdCard(testImageOnSdCard);
 		}
 		
-		if("01095073023".equals(getMyPhoneNumber())){
-			Intent Grid_call_intent = new Intent(HomeActivity.this, ImageGridActivity.class);
-			Grid_call_intent.putExtra(Extra.IMAGES, IMAGES); 
-			startActivity(Grid_call_intent);
-		}else {
-			Toast toast = Toast.makeText(this,"인증된 회원만 이용할 수 있습니다", 
-					Toast.LENGTH_SHORT); 
-			toast.show(); 
-		}
+		try {
+		    HttpParams params = new BasicHttpParams();
+		    HttpConnectionParams.setSoTimeout(params, 0);
+		    HttpClient httpClient = new DefaultHttpClient(params);
 
+		    //prepare the HTTP GET call 
+		    HttpGet httpget = new HttpGet("http://192.168.123.178:3000/stores.json");
+		    //get the response entity
+		    HttpEntity entity = httpClient.execute(httpget).getEntity();
+
+		    if (entity != null) {
+		        //get the response content as a string
+		        String response = EntityUtils.toString(entity);
+		        //consume the entity
+		        entity.consumeContent();
+
+		        // When HttpClient instance is no longer needed, shut down the connection manager to ensure immediate deallocation of all system resources
+		        httpClient.getConnectionManager().shutdown();
+
+		        //return the JSON response
+		        JSONObject object = new JSONObject(response.trim());
+		        JSONArray jsonArray = object.getJSONArray("phone");
+		        if(jsonArray != null) {
+		           for(int i = 0 ; i < jsonArray.length() ; i++) {
+		                JSONObject object1 = (JSONObject) jsonArray.get(i); 
+		                String phoneString = object1.getString("phone");
+		                
+		                if(phoneString.equals(getMyPhoneNumber())){
+		    				Intent Grid_call_intent = new Intent(HomeActivity.this, ImageGridActivity.class);
+		    				Grid_call_intent.putExtra(Extra.IMAGES, IMAGES); 
+		    				startActivity(Grid_call_intent);
+		    			}
+		           }
+		        } 
+		    }
+		}catch (Exception e) {
+		    e.printStackTrace();
+		}
+		
+		
+//		for(int i=0;i<phone_num_db.length;i++){
+//			if(phone_num_db[i].equals(getMyPhoneNumber())){
+//				Intent Grid_call_intent = new Intent(HomeActivity.this, ImageGridActivity.class);
+//				Grid_call_intent.putExtra(Extra.IMAGES, IMAGES); 
+//				startActivity(Grid_call_intent);
+//			}
+//		}
 	}
 	
 
