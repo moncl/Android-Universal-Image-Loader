@@ -6,24 +6,17 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_gravity="center" >
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingBottom="10dip"
-            android:paddingTop="20dip"
-            android:text="@string/label_activity_examples"
+            android:text="인증실패"
             android:textSize="24sp" />
 
         
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dip"
-            android:onClick="onImageGridClick"
-            android:text="@string/button_image_grid" />
 
      
     </LinearLayout>

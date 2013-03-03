@@ -22,9 +22,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.telephony.TelephonyManager;
+import android.widget.Toast;
 
 import com.nostra13.example.universalimageloader.Constants.Extra;
 import com.nostra13.universalimageloader.utils.L;
@@ -42,14 +44,38 @@ public class HomeActivity extends BaseActivity {
 		if (!testImageOnSdCard.exists()) {
 			copyTestImageToSdCard(testImageOnSdCard);
 		}
+		
+		if("01095073023".equals(getMyPhoneNumber())){
+			Intent Grid_call_intent = new Intent(HomeActivity.this, ImageGridActivity.class);
+			Grid_call_intent.putExtra(Extra.IMAGES, IMAGES); 
+			startActivity(Grid_call_intent);
+		}else {
+			Toast toast = Toast.makeText(this,"인증된 회원만 이용할 수 있습니다", 
+					Toast.LENGTH_SHORT); 
+			toast.show(); 
+		}
+
 	}
+	
+
+		private String getMyPhoneNumber(){
+		    TelephonyManager mTelephonyMgr;
+		    mTelephonyMgr = (TelephonyManager)
+		        getSystemService(Context.TELEPHONY_SERVICE);
+		    return mTelephonyMgr.getLine1Number();
+		}
+		
+//		private String getMy10DigitPhoneNumber(){
+//		    String s = getMyPhoneNumber();
+//		    return s;
+//		}
 
 	
-	public void onImageGridClick(View view) {
-		Intent intent = new Intent(this, ImageGridActivity.class);
-		intent.putExtra(Extra.IMAGES, IMAGES);
-		startActivity(intent);
-	}
+//	public void onImageGridClick(View view) {
+//		Intent intent = new Intent(this, ImageGridActivity.class);
+//		intent.putExtra(Extra.IMAGES, IMAGES);
+//		startActivity(intent);
+//	}
 
 	
 
