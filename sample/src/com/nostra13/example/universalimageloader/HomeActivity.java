@@ -54,7 +54,8 @@ public class HomeActivity extends BaseActivity {
 		
 		File testImageOnSdCard = new File("/mnt/sdcard/UniversalImageLoader.png");
 		if (!testImageOnSdCard.exists()) {
-			copyTestImageToSdCard(testImageOnSdCard);
+			copyTestImageToSdCard(testImageOnSdCard);       /// Hello..
+
 		}
 		
 		try {
